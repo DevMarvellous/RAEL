@@ -11,12 +11,17 @@ const MAX_MESSAGES = 20
 
 export function NaryChat() {
   const [isOpen, setIsOpen] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [messageCount, setMessageCount] = useState(0)
   const [hasAutoOpened, setHasAutoOpened] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   // Auto-open on desktop after 10 seconds (only once per session)
   useEffect(() => {
@@ -87,26 +92,29 @@ export function NaryChat() {
   return (
     <div className="fixed bottom-6 left-6 z-50">
       {/* Chat Button */}
-      <motion.button
-        onClick={() => setIsOpen(!isOpen)}
-        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-royal-blue text-white shadow-[0_4px_20px_rgba(24,69,200,0.40)] transition-transform hover:scale-105"
-        whileTap={{ scale: 0.95 }}
-        aria-label={isOpen ? 'Close chat' : 'Open chat with Nary'}
-      >
-        {isOpen ? (
-          <X className="h-6 w-6" />
-        ) : (
-          <Sparkles className="h-6 w-6 fill-white" />
-        )}
-        
-        {/* Pulse ring */}
-        {!isOpen && (
-          <span
-            className="absolute inset-0 rounded-full border-2 border-gold/50"
-            style={{ animation: 'pulse-ring 4s ease-out infinite' }}
-          />
-        )}
-      </motion.button>
+      {isMounted && (
+        <motion.button
+          onClick={() => setIsOpen(!isOpen)}
+          className="relative flex h-14 w-14 items-center justify-center rounded-full bg-royal-blue text-white shadow-[0_4px_20px_rgba(24,69,200,0.40)] transition-transform hover:scale-105"
+          whileTap={{ scale: 0.95 }}
+          aria-label={isOpen ? 'Close chat' : 'Open chat with Nary'}
+        >
+          {isOpen ? (
+            <X className="h-6 w-6" />
+          ) : (
+            <Sparkles className="h-6 w-6 fill-white" />
+          )}
+
+          {/* Pulse ring */}
+          {!isOpen && (
+            <span
+              className="absolute inset-0 animate-ping rounded-full bg-royal-blue/30"
+              style={{ animationDuration: '3s' }}
+            />
+          )}
+        </motion.button>
+      )}
+
 
       {/* Tooltip (desktop only) */}
       {!isOpen && (

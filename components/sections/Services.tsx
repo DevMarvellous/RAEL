@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Monitor, BarChart3, Zap, LayoutGrid, Package, Layers } from 'lucide-react'
@@ -110,8 +110,13 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
 
 export function Services() {
   const [showAll, setShowAll] = useState(false)
+  const [isMounted, setIsMounted] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 })
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
 
   const visibleServices = showAll ? services : services.slice(0, 3)
 
@@ -141,14 +146,16 @@ export function Services() {
         </div>
 
         {/* Show All Button - Mobile Only */}
-        <div className="mt-8 text-center lg:hidden">
-          <button
-            onClick={() => setShowAll(!showAll)}
-            className="font-sans text-sm font-semibold text-royal-blue underline underline-offset-4"
-          >
-            {showAll ? 'Show less' : 'Show all services'}
-          </button>
-        </div>
+        {isMounted && (
+          <div className="mt-8 text-center lg:hidden">
+            <button
+              onClick={() => setShowAll(!showAll)}
+              className="font-sans text-sm font-semibold text-royal-blue underline underline-offset-4"
+            >
+              {showAll ? 'Show less' : 'Show all services'}
+            </button>
+          </div>
+        )}
       </div>
     </section>
   )

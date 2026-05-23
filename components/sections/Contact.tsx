@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useRef } from 'react'
+import { useState, useRef, useEffect } from 'react'
 import { motion, useInView } from 'framer-motion'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { sendContactForm, type ContactFormData } from '@/lib/emailjs'
@@ -31,7 +31,12 @@ const ease = [0.16, 1, 0.3, 1]
 export function Contact() {
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 })
+  const [isMounted, setIsMounted] = useState(false)
   const [formState, setFormState] = useState<'idle' | 'loading' | 'success' | 'error'>('idle')
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   const [formData, setFormData] = useState<ContactFormData>({
     fullName: '',
     businessName: '',
@@ -137,164 +142,169 @@ export function Contact() {
             transition={{ duration: 0.8, ease, delay: 0.2 }}
             className="rounded-2xl bg-white p-6 lg:p-8"
           >
-            {formState === 'success' ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/20">
-                  <Check className="h-8 w-8 text-gold" />
-                </div>
-                <h3 className="mb-2 font-sans text-xl font-bold text-text-dark">Message received!</h3>
-                <p className="mb-4 font-sans text-text-mid">{"We'll get back to you within 24 hours."}</p>
-                <a
-                  href="https://wa.me/2349030891731"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-sans text-sm font-semibold text-whatsapp hover:underline"
-                >
-                  Or chat us directly &rarr;
-                </a>
-              </div>
-            ) : (
+            {isMounted && (
               <>
-                <h3 className="mb-6 font-sans text-lg font-bold text-text-dark">Start Your Project</h3>
-
-                {formState === 'error' && (
-                  <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600">
-                    Something went wrong. Please{' '}
-                    <a href="mailto:therefinary.1@gmail.com" className="underline">
-                      email us directly
+                {formState === 'success' ? (
+                  <div className="flex flex-col items-center justify-center py-12 text-center">
+                    <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-gold/20">
+                      <Check className="h-8 w-8 text-gold" />
+                    </div>
+                    <h3 className="mb-2 font-sans text-xl font-bold text-text-dark">Message received!</h3>
+                    <p className="mb-4 font-sans text-text-mid">{"We'll get back to you within 24 hours."}</p>
+                    <a
+                      href="https://wa.me/2349030891731"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="font-sans text-sm font-semibold text-whatsapp hover:underline"
+                    >
+                      Or chat us directly &rarr;
                     </a>
-                    .
                   </div>
-                )}
+                ) : (
+                  <>
+                    <h3 className="mb-6 font-sans text-lg font-bold text-text-dark">Start Your Project</h3>
 
-                <form onSubmit={handleSubmit} className="space-y-4">
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="fullName" className="sr-only">Full Name</label>
-                      <input
-                        type="text"
-                        id="fullName"
-                        name="fullName"
-                        placeholder="Full Name *"
-                        required
-                        value={formData.fullName}
-                        onChange={handleChange}
-                        className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="businessName" className="sr-only">Business Name</label>
-                      <input
-                        type="text"
-                        id="businessName"
-                        name="businessName"
-                        placeholder="Business Name *"
-                        required
-                        value={formData.businessName}
-                        onChange={handleChange}
-                        className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="email" className="sr-only">Email Address</label>
-                      <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        placeholder="Email Address *"
-                        required
-                        value={formData.email}
-                        onChange={handleChange}
-                        className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      />
-                    </div>
-                    <div>
-                      <label htmlFor="whatsapp" className="sr-only">WhatsApp Number</label>
-                      <input
-                        type="tel"
-                        id="whatsapp"
-                        name="whatsapp"
-                        placeholder="WhatsApp Number *"
-                        required
-                        value={formData.whatsapp}
-                        onChange={handleChange}
-                        className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      />
-                    </div>
-                  </div>
-
-                  <div className="grid gap-4 sm:grid-cols-2">
-                    <div>
-                      <label htmlFor="industry" className="sr-only">Industry</label>
-                      <select
-                        id="industry"
-                        name="industry"
-                        required
-                        value={formData.industry}
-                        onChange={handleChange}
-                        className="w-full appearance-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      >
-                        <option value="" disabled>Industry *</option>
-                        {industries.map(ind => (
-                          <option key={ind} value={ind}>{ind}</option>
-                        ))}
-                      </select>
-                    </div>
-                    <div>
-                      <label htmlFor="service" className="sr-only">What do you need?</label>
-                      <select
-                        id="service"
-                        name="service"
-                        required
-                        value={formData.service}
-                        onChange={handleChange}
-                        className="w-full appearance-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                      >
-                        <option value="" disabled>What do you need? *</option>
-                        {services.map(svc => (
-                          <option key={svc} value={svc}>{svc}</option>
-                        ))}
-                      </select>
-                    </div>
-                  </div>
-
-                  <div>
-                    <label htmlFor="message" className="sr-only">Tell us about your project</label>
-                    <textarea
-                      id="message"
-                      name="message"
-                      rows={4}
-                      placeholder="Describe your business and what you're trying to solve..."
-                      value={formData.message}
-                      onChange={handleChange}
-                      className="w-full resize-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
-                    />
-                  </div>
-
-                  <button
-                    type="submit"
-                    disabled={formState === 'loading'}
-                    className="flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-4 font-sans text-base font-bold text-navy transition-all hover:bg-gold-light hover:shadow-[0_0_24px_var(--gold-glow)] disabled:opacity-70"
-                  >
-                    {formState === 'loading' ? (
-                      <>
-                        <Loader2 className="h-5 w-5 animate-spin" />
-                        Sending...
-                      </>
-                    ) : (
-                      <>
-                        <span>&rarr;</span>
-                        Send to RAEL
-                      </>
+                    {formState === 'error' && (
+                      <div className="mb-4 rounded-lg bg-red-50 p-4 text-sm text-red-600">
+                        Something went wrong. Please{' '}
+                        <a href="mailto:therefinary.1@gmail.com" className="underline">
+                          email us directly
+                        </a>
+                        .
+                      </div>
                     )}
-                  </button>
-                </form>
+
+                    <form onSubmit={handleSubmit} className="space-y-4">
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="fullName" className="sr-only">Full Name</label>
+                          <input
+                            type="text"
+                            id="fullName"
+                            name="fullName"
+                            placeholder="Full Name *"
+                            required
+                            value={formData.fullName}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="businessName" className="sr-only">Business Name</label>
+                          <input
+                            type="text"
+                            id="businessName"
+                            name="businessName"
+                            placeholder="Business Name *"
+                            required
+                            value={formData.businessName}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="email" className="sr-only">Email Address</label>
+                          <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            placeholder="Email Address *"
+                            required
+                            value={formData.email}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          />
+                        </div>
+                        <div>
+                          <label htmlFor="whatsapp" className="sr-only">WhatsApp Number</label>
+                          <input
+                            type="tel"
+                            id="whatsapp"
+                            name="whatsapp"
+                            placeholder="WhatsApp Number *"
+                            required
+                            value={formData.whatsapp}
+                            onChange={handleChange}
+                            className="w-full rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          />
+                        </div>
+                      </div>
+
+                      <div className="grid gap-4 sm:grid-cols-2">
+                        <div>
+                          <label htmlFor="industry" className="sr-only">Industry</label>
+                          <select
+                            id="industry"
+                            name="industry"
+                            required
+                            value={formData.industry}
+                            onChange={handleChange}
+                            className="w-full appearance-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          >
+                            <option value="" disabled>Industry *</option>
+                            {industries.map(ind => (
+                              <option key={ind} value={ind}>{ind}</option>
+                            ))}
+                          </select>
+                        </div>
+                        <div>
+                          <label htmlFor="service" className="sr-only">What do you need?</label>
+                          <select
+                            id="service"
+                            name="service"
+                            required
+                            value={formData.service}
+                            onChange={handleChange}
+                            className="w-full appearance-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                          >
+                            <option value="" disabled>What do you need? *</option>
+                            {services.map(svc => (
+                              <option key={svc} value={svc}>{svc}</option>
+                            ))}
+                          </select>
+                        </div>
+                      </div>
+
+                      <div>
+                        <label htmlFor="message" className="sr-only">Tell us about your project</label>
+                        <textarea
+                          id="message"
+                          name="message"
+                          rows={4}
+                          placeholder="Describe your business and what you're trying to solve..."
+                          value={formData.message}
+                          onChange={handleChange}
+                          className="w-full resize-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark placeholder:text-text-muted transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
+                        />
+                      </div>
+
+                      <button
+                        type="submit"
+                        disabled={formState === 'loading'}
+                        className="flex w-full items-center justify-center gap-2 rounded-full bg-gold px-6 py-4 font-sans text-base font-bold text-navy transition-all hover:bg-gold-light hover:shadow-[0_0_24px_var(--gold-glow)] disabled:opacity-70"
+                      >
+                        {formState === 'loading' ? (
+                          <>
+                            <Loader2 className="h-5 w-5 animate-spin" />
+                            Sending...
+                          </>
+                        ) : (
+                          <>
+                            <span>&rarr;</span>
+                            Send to RAEL
+                          </>
+                        )}
+                      </button>
+                    </form>
+                  </>
+                )}
               </>
             )}
           </motion.div>
+
         </div>
       </div>
     </section>

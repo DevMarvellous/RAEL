@@ -1,11 +1,17 @@
 'use client'
 
+import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
 import { ChevronDown } from 'lucide-react'
 
 const ease = [0.16, 1, 0.3, 1]
 
 export function Hero() {
+  const [isMounted, setIsMounted] = useState(false)
+
+  useEffect(() => {
+    setIsMounted(true)
+  }, [])
   const handleScrollToServices = () => {
     const element = document.getElementById('services')
     if (element) {
@@ -23,27 +29,31 @@ export function Hero() {
   return (
     <section id="home" className="relative min-h-svh overflow-hidden bg-royal-blue">
       {/* Floating Orbs */}
-      <div
-        className="pointer-events-none absolute -right-[100px] -top-[100px] h-[500px] w-[500px] rounded-full opacity-60"
-        style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)',
-          animation: 'float1 12s ease-in-out infinite',
-        }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-[80px] -left-[60px] h-[350px] w-[350px] rounded-full opacity-60"
-        style={{
-          background: 'radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)',
-          animation: 'float2 15s ease-in-out infinite',
-        }}
-      />
-      <div
-        className="pointer-events-none absolute right-[15%] top-[40%] h-[200px] w-[200px] rounded-full opacity-60"
-        style={{
-          background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
-          animation: 'float3 10s ease-in-out infinite',
-        }}
-      />
+      {isMounted && (
+        <>
+          <div
+            className="pointer-events-none absolute -right-[100px] -top-[100px] h-[500px] w-[500px] rounded-full opacity-60"
+            style={{
+              background: 'radial-gradient(circle, rgba(255,255,255,0.06) 0%, transparent 70%)',
+              animation: 'float1 12s ease-in-out infinite',
+            }}
+          />
+          <div
+            className="pointer-events-none absolute -bottom-[80px] -left-[60px] h-[350px] w-[350px] rounded-full opacity-60"
+            style={{
+              background: 'radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)',
+              animation: 'float2 15s ease-in-out infinite',
+            }}
+          />
+          <div
+            className="pointer-events-none absolute right-[15%] top-[40%] h-[200px] w-[200px] rounded-full opacity-60"
+            style={{
+              background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
+              animation: 'float3 10s ease-in-out infinite',
+            }}
+          />
+        </>
+      )}
 
       {/* Grain Overlay */}
       <div className="grain-overlay" />
