@@ -1,0 +1,216 @@
+'use client'
+
+import { useState, useEffect, useRef } from 'react'
+import { motion, AnimatePresence } from 'framer-motion'
+import { Sparkles, X, Send, Loader2 } from 'lucide-react'
+import { sendMessage, type Message } from '@/lib/gemini'
+
+const OPENING_MESSAGE = `Hi! I'm Nary, RAEL's assistant. I can tell you about our services, how we work, or help you figure out what you need. What's on your mind?`
+
+const MAX_MESSAGES = 20
+
+export function NaryChat() {
+  const [isOpen, setIsOpen] = useState(false)
+  const [messages, setMessages] = useState<Message[]>([])
+  const [input, setInput] = useState('')
+  const [isLoading, setIsLoading] = useState(false)
+  const [messageCount, setMessageCount] = useState(0)
+  const [hasAutoOpened, setHasAutoOpened] = useState(false)
+  const messagesEndRef = useRef<HTMLDivElement>(null)
+
+  // Auto-open on desktop after 10 seconds (only once per session)
+  useEffect(() => {
+    const wasAutoOpened = sessionStorage.getItem('nary-auto-opened')
+    const isMobile = window.innerWidth < 1024
+
+    if (!wasAutoOpened && !isMobile) {
+      const timer = setTimeout(() => {
+        setIsOpen(true)
+        setHasAutoOpened(true)
+        sessionStorage.setItem('nary-auto-opened', 'true')
+      }, 10000)
+
+      return () => clearTimeout(timer)
+    }
+  }, [])
+
+  // Add opening message when chat opens for first time
+  useEffect(() => {
+    if (isOpen && messages.length === 0) {
+      setMessages([{ role: 'assistant', content: OPENING_MESSAGE }])
+    }
+  }, [isOpen, messages.length])
+
+  // Scroll to bottom when new messages arrive
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
+  const handleSend = async () => {
+    if (!input.trim() || isLoading) return
+
+    // Check rate limit
+    if (messageCount >= MAX_MESSAGES) {
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: "I've hit my limit for now! Chat the team directly: https://wa.me/2349030891731"
+      }])
+      return
+    }
+
+    const userMessage = input.trim()
+    setInput('')
+    setMessages(prev => [...prev, { role: 'user', content: userMessage }])
+    setIsLoading(true)
+    setMessageCount(prev => prev + 1)
+
+    try {
+      const response = await sendMessage(messages, userMessage)
+      setMessages(prev => [...prev, { role: 'assistant', content: response }])
+    } catch {
+      setMessages(prev => [...prev, {
+        role: 'assistant',
+        content: "Oops, I'm having trouble connecting. Chat the team directly: https://wa.me/2349030891731"
+      }])
+    } finally {
+      setIsLoading(false)
+    }
+  }
+
+  const handleKeyDown = (e: React.KeyboardEvent) => {
+    if (e.key === 'Enter' && !e.shiftKey) {
+      e.preventDefault()
+      handleSend()
+    }
+  }
+
+  return (
+    <div className="fixed bottom-6 left-6 z-50">
+      {/* Chat Button */}
+      <motion.button
+        onClick={() => setIsOpen(!isOpen)}
+        className="relative flex h-14 w-14 items-center justify-center rounded-full bg-royal-blue text-white shadow-[0_4px_20px_rgba(24,69,200,0.40)] transition-transform hover:scale-105"
+        whileTap={{ scale: 0.95 }}
+        aria-label={isOpen ? 'Close chat' : 'Open chat with Nary'}
+      >
+        {isOpen ? (
+          <X className="h-6 w-6" />
+        ) : (
+          <Sparkles className="h-6 w-6 fill-white" />
+        )}
+        
+        {/* Pulse ring */}
+        {!isOpen && (
+          <span
+            className="absolute inset-0 rounded-full border-2 border-gold/50"
+            style={{ animation: 'pulse-ring 4s ease-out infinite' }}
+          />
+        )}
+      </motion.button>
+
+      {/* Tooltip (desktop only) */}
+      {!isOpen && (
+        <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg bg-navy px-3 py-2 font-sans text-[13px] text-white lg:block">
+          Ask Nary
+          <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-navy" />
+        </div>
+      )}
+
+      {/* Chat Panel */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8, y: 20 }}
+            animate={{ opacity: 1, scale: 1, y: 0 }}
+            exit={{ opacity: 0, scale: 0.8, y: 20 }}
+            transition={{ type: 'spring', stiffness: 400, damping: 30 }}
+            style={{ transformOrigin: 'bottom left' }}
+            className="absolute bottom-20 left-0 flex h-[70vh] w-[90vw] max-w-[340px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl lg:h-[480px]"
+          >
+            {/* Header */}
+            <div className="flex items-center gap-3 bg-royal-blue px-4 py-3">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
+                <Sparkles className="h-5 w-5 fill-white text-white" />
+              </div>
+              <div>
+                <p className="font-sans text-[15px] font-semibold text-white">Nary</p>
+                <p className="font-sans text-xs text-text-white-muted">{"RAEL's AI Assistant"}</p>
+              </div>
+              <button
+                onClick={() => setIsOpen(false)}
+                className="ml-auto p-1 text-white/70 transition-colors hover:text-white"
+                aria-label="Close chat"
+              >
+                <X className="h-5 w-5" />
+              </button>
+            </div>
+
+            {/* Messages */}
+            <div className="flex-1 overflow-y-auto p-4">
+              <div className="space-y-4">
+                {messages.map((message, index) => (
+                  <div
+                    key={index}
+                    className={`flex ${message.role === 'user' ? 'justify-end' : 'justify-start'}`}
+                  >
+                    <div
+                      className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
+                        message.role === 'user'
+                          ? 'bg-royal-blue text-white'
+                          : 'bg-gray-white text-text-dark'
+                      }`}
+                    >
+                      <p className="whitespace-pre-wrap font-sans text-[14px] leading-relaxed">
+                        {message.content}
+                      </p>
+                    </div>
+                  </div>
+                ))}
+
+                {/* Typing indicator */}
+                {isLoading && (
+                  <div className="flex justify-start">
+                    <div className="flex items-center gap-1 rounded-2xl bg-gray-white px-4 py-3">
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted" style={{ animationDelay: '0ms' }} />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted" style={{ animationDelay: '150ms' }} />
+                      <span className="h-2 w-2 animate-bounce rounded-full bg-text-muted" style={{ animationDelay: '300ms' }} />
+                    </div>
+                  </div>
+                )}
+
+                <div ref={messagesEndRef} />
+              </div>
+            </div>
+
+            {/* Input */}
+            <div className="border-t border-border p-3">
+              <div className="flex items-center gap-2">
+                <input
+                  type="text"
+                  value={input}
+                  onChange={(e) => setInput(e.target.value)}
+                  onKeyDown={handleKeyDown}
+                  placeholder="Ask a question..."
+                  disabled={isLoading}
+                  className="flex-1 rounded-xl border border-border bg-gray-white px-4 py-2.5 font-sans text-[14px] text-text-dark placeholder:text-text-muted focus:border-royal-blue focus:outline-none"
+                />
+                <button
+                  onClick={handleSend}
+                  disabled={!input.trim() || isLoading}
+                  className="flex h-10 w-10 items-center justify-center rounded-xl bg-royal-blue text-white transition-colors hover:bg-royal-blue-dark disabled:opacity-50"
+                  aria-label="Send message"
+                >
+                  {isLoading ? (
+                    <Loader2 className="h-5 w-5 animate-spin" />
+                  ) : (
+                    <Send className="h-5 w-5" />
+                  )}
+                </button>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+    </div>
+  )
+}
