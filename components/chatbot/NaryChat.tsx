@@ -104,15 +104,8 @@ export function NaryChat() {
           ) : (
             <Sparkles className="h-6 w-6 fill-white" />
           )}
+          </motion.button>
 
-          {/* Pulse ring */}
-          {!isOpen && (
-            <span
-              className="absolute inset-0 animate-ping rounded-full bg-royal-blue/30"
-              style={{ animationDuration: '3s' }}
-            />
-          )}
-        </motion.button>
       )}
 
 
