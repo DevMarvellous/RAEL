@@ -97,14 +97,12 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         <Icon className="mb-4 h-10 w-10 stroke-royal-blue stroke-[1.5]" />
         <p className="mb-2 font-mono text-[11px] text-gold">{service.number}</p>
         <h3 className="mb-3 font-sans text-xl font-bold text-text-dark">{service.title}</h3>
-        <p className="mb-4 font-sans text-[15px] leading-relaxed text-text-mid">
+        <p className="font-sans text-[15px] leading-relaxed text-text-mid">
           {service.description}
         </p>
-        <span className="font-sans text-sm font-semibold text-royal-blue">
-          Learn more &rarr;
-        </span>
-      </div>
-    </motion.div>
+        </div>
+        </motion.div>
+
   )
 }
 
