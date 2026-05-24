@@ -1,4 +1,4 @@
-import { GoogleGenerativeAI } from '@google/generative-ai'
+import { GoogleGenAI } from '@google/genai'
 
 const SYSTEM_PROMPT = `You are Nary, the AI assistant for RAEL (The Refinery African Entrepreneurship Lab),
 a software agency based in Osun, Nigeria. Founded in 2026.
@@ -26,12 +26,12 @@ Contact:
 - Email: therefinary.1@gmail.com
 - Website: rael.refinery.sbs
 
+Owners of RAEL: RAEL is co-founded by Marvellous Adepoju(aka Marvel Develops) who is the current Manager and CEO of RAEL and Abiola Samuel Omolayo(aka Global P.Sam) who is the founder and CEO of The Refinery(the parent company of RAEL)
+
 Personality: Professional, warm, concise. Max 3 sentences per response.
 Never sound like a robot. If a question is too complex for you, say:
 "That's a great one for the team — want their WhatsApp?"
 then provide the WhatsApp link: https://wa.me/2349030891731
-
-Owners of RAEL: RAEL is co-founded by Marvellous Adepoju(aka Marvel Develops) who is the current Manager and CEO of RAEL and Abiola Samuel Omolayo(aka Global P.Sam) who is the founder and CEO of The Refinery(the parent company of RAEL)
 
 Do NOT discuss competitors. Do NOT discuss pricing in specifics.
 For pricing: "Pricing depends on your project — the team will give you
@@ -42,25 +42,27 @@ export interface Message {
   content: string
 }
 
-let genAI: GoogleGenerativeAI | null = null
+let aiClient: any = null
 
-function getGenAI() {
-  if (!genAI) {
+function getAIClient() {
+  if (!aiClient) {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
     if (!apiKey) {
       throw new Error('Gemini API key is not configured')
     }
-    genAI = new GoogleGenerativeAI(apiKey)
+    // Note: In 2026, @google/genai is the standard unified SDK
+    aiClient = new GoogleGenAI({ apiKey })
   }
-  return genAI
+  return aiClient
 }
 
 export async function sendMessage(history: Message[], userMessage: string): Promise<string> {
   try {
-    const ai = getGenAI()
-    const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' })
-
-    const chat = model.startChat({
+    const ai = getAIClient()
+    
+    // Using the flagship gemini-3.5-flash (Released May 2026)
+    const chat = ai.chats.create({
+      model: 'gemini-3.5-flash',
       history: [
         {
           role: 'user',
@@ -71,17 +73,18 @@ export async function sendMessage(history: Message[], userMessage: string): Prom
           parts: [{ text: 'Understood! I am Nary, RAEL\'s AI assistant. I\'m ready to help visitors learn about our services.' }],
         },
         ...history.map(msg => ({
-          role: msg.role === 'user' ? 'user' as const : 'model' as const,
+          role: msg.role === 'user' ? 'user' : 'model',
           parts: [{ text: msg.content }],
         })),
       ],
     })
 
     const result = await chat.sendMessage(userMessage)
-    const response = result.response
-    return response.text()
+    // In @google/genai, result.text is directly accessible
+    return result.text
   } catch (error) {
     console.error('Nary API Error:', error)
-    throw error
+    // Fallback message for the UI
+    throw new Error('Nary is momentarily resting. Please contact the team directly.')
   }
 }
