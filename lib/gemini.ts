@@ -80,7 +80,7 @@ export async function sendMessage(history: Message[], userMessage: string): Prom
     })
 
     const result = await chat.sendMessage({
-      parts: [{ text: userMessage }]
+      message: userMessage
     })
     // In @google/genai, result.text is directly accessible
     return result.text
