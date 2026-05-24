@@ -42,9 +42,9 @@ export interface Message {
   content: string
 }
 
-let aiClient: any = null
+let aiClient: GoogleGenAI | null = null
 
-function getAIClient() {
+function getAIClient(): GoogleGenAI {
   if (!aiClient) {
     const apiKey = process.env.NEXT_PUBLIC_GEMINI_API_KEY
     if (!apiKey) {
