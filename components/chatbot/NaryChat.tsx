@@ -162,7 +162,19 @@ export function NaryChat() {
                       }`}
                     >
                       <p className="whitespace-pre-wrap font-sans text-[14px] leading-relaxed">
-                        {message.content}
+                        {message.content.split(/(https?:\/\/[^\s]+)/g).map((part, i) => 
+                          part.match(/^https?:\/\//) ? (
+                            <a 
+                              key={i} 
+                              href={part} 
+                              target="_blank" 
+                              rel="noopener noreferrer"
+                              className="underline decoration-gold/50 underline-offset-2 hover:text-royal-blue transition-colors break-all"
+                            >
+                              {part}
+                            </a>
+                          ) : part
+                        )}
                       </p>
                     </div>
                   </div>
