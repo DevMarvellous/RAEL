@@ -90,7 +90,7 @@ export function NaryChat() {
   }
 
   return (
-    <div className="fixed bottom-6 left-6 z-50">
+    <div className="fixed bottom-6 right-6 z-50">
       {/* Chat Button */}
       {isMounted && (
         <motion.button
@@ -104,16 +104,15 @@ export function NaryChat() {
           ) : (
             <Sparkles className="h-6 w-6 fill-white" />
           )}
-          </motion.button>
-
+        </motion.button>
       )}
 
 
       {/* Tooltip (desktop only) */}
       {!isOpen && (
-        <div className="absolute bottom-full left-1/2 mb-2 hidden -translate-x-1/2 whitespace-nowrap rounded-lg bg-navy px-3 py-2 font-sans text-[13px] text-white lg:block">
+        <div className="absolute bottom-full right-0 mb-2 hidden whitespace-nowrap rounded-lg bg-navy px-3 py-2 font-sans text-[13px] text-white lg:block">
           Ask Nary
-          <div className="absolute left-1/2 top-full -translate-x-1/2 border-4 border-transparent border-t-navy" />
+          <div className="absolute right-5 top-full border-4 border-transparent border-t-navy" />
         </div>
       )}
 
@@ -125,9 +124,10 @@ export function NaryChat() {
             animate={{ opacity: 1, scale: 1, y: 0 }}
             exit={{ opacity: 0, scale: 0.8, y: 20 }}
             transition={{ type: 'spring', stiffness: 400, damping: 30 }}
-            style={{ transformOrigin: 'bottom left' }}
-            className="absolute bottom-20 left-0 flex h-[70vh] w-[90vw] max-w-[340px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl lg:h-[480px]"
+            style={{ transformOrigin: 'bottom right' }}
+            className="absolute bottom-20 right-0 flex h-[70vh] w-[90vw] max-w-[340px] flex-col overflow-hidden rounded-2xl bg-white shadow-2xl lg:h-[480px]"
           >
+
             {/* Header */}
             <div className="flex items-center gap-3 bg-royal-blue px-4 py-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
