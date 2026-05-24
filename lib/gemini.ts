@@ -58,7 +58,7 @@ function getGenAI() {
 export async function sendMessage(history: Message[], userMessage: string): Promise<string> {
   try {
     const ai = getGenAI()
-    const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' })
+    const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' })
 
     const chat = model.startChat({
       history: [
