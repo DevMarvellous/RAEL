@@ -56,27 +56,32 @@ function getGenAI() {
 }
 
 export async function sendMessage(history: Message[], userMessage: string): Promise<string> {
-  const ai = getGenAI()
-  const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash' })
+  try {
+    const ai = getGenAI()
+    const model = ai.getGenerativeModel({ model: 'gemini-1.5-flash-latest' })
 
-  const chat = model.startChat({
-    history: [
-      {
-        role: 'user',
-        parts: [{ text: 'You are Nary. Here is your system context: ' + SYSTEM_PROMPT }],
-      },
-      {
-        role: 'model',
-        parts: [{ text: 'Understood! I am Nary, RAEL\'s AI assistant. I\'m ready to help visitors learn about our services.' }],
-      },
-      ...history.map(msg => ({
-        role: msg.role === 'user' ? 'user' as const : 'model' as const,
-        parts: [{ text: msg.content }],
-      })),
-    ],
-  })
+    const chat = model.startChat({
+      history: [
+        {
+          role: 'user',
+          parts: [{ text: 'You are Nary. Here is your system context: ' + SYSTEM_PROMPT }],
+        },
+        {
+          role: 'model',
+          parts: [{ text: 'Understood! I am Nary, RAEL\'s AI assistant. I\'m ready to help visitors learn about our services.' }],
+        },
+        ...history.map(msg => ({
+          role: msg.role === 'user' ? 'user' as const : 'model' as const,
+          parts: [{ text: msg.content }],
+        })),
+      ],
+    })
 
-  const result = await chat.sendMessage(userMessage)
-  const response = result.response
-  return response.text()
+    const result = await chat.sendMessage(userMessage)
+    const response = result.response
+    return response.text()
+  } catch (error) {
+    console.error('Nary API Error:', error)
+    throw error
+  }
 }
