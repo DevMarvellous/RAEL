@@ -129,17 +129,17 @@ export function NaryChat() {
           >
 
             {/* Header */}
-            <div className="flex items-center gap-3 bg-royal-blue px-4 py-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-white/20">
-                <Sparkles className="h-5 w-5 fill-white text-white" />
+            <div className="flex items-center gap-3 bg-gold px-4 py-3 shadow-sm">
+              <div className="flex h-10 w-10 items-center justify-center rounded-full bg-navy/10">
+                <Sparkles className="h-5 w-5 fill-navy text-navy" />
               </div>
               <div>
-                <p className="font-sans text-[15px] font-semibold text-white">Nary</p>
-                <p className="font-sans text-xs text-text-white-muted">{"RAEL's AI Assistant"}</p>
+                <p className="font-sans text-[15px] font-bold text-navy">Nary</p>
+                <p className="font-sans text-xs text-navy/70">{"RAEL's AI Assistant"}</p>
               </div>
               <button
                 onClick={() => setIsOpen(false)}
-                className="ml-auto p-1 text-white/70 transition-colors hover:text-white"
+                className="ml-auto p-1 text-navy/50 transition-colors hover:text-navy"
                 aria-label="Close chat"
               >
                 <X className="h-5 w-5" />
@@ -158,7 +158,7 @@ export function NaryChat() {
                       className={`max-w-[80%] rounded-2xl px-4 py-2.5 ${
                         message.role === 'user'
                           ? 'bg-royal-blue text-white'
-                          : 'bg-gray-white text-text-dark'
+                          : 'border border-gold/20 bg-gray-white text-text-dark shadow-sm'
                       }`}
                     >
                       <p className="whitespace-pre-wrap font-sans text-[14px] leading-relaxed">
