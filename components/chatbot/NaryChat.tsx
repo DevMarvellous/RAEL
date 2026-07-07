@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import { Sparkles, X, Send, Loader2 } from 'lucide-react'
 import { sendMessage, type Message } from '@/lib/gemini'
 
-const OPENING_MESSAGE = `Hi! I'm Nary, RAEL's assistant. I can tell you about our services, how we work, or help you figure out what you need. What's on your mind?`
+const OPENING_MESSAGE = `Hi! I'm RAEL's AI assistant. I can tell you about our services, how we work, or help you figure out what you need. What's on your mind?`
 
 const MAX_MESSAGES = 20
 
@@ -97,7 +97,7 @@ export function NaryChat() {
           onClick={() => setIsOpen(!isOpen)}
           className="relative flex h-14 w-14 items-center justify-center rounded-full bg-royal-blue text-white shadow-[0_4px_20px_rgba(24,69,200,0.40)] transition-transform hover:scale-105"
           whileTap={{ scale: 0.95 }}
-          aria-label={isOpen ? 'Close chat' : 'Open chat with Nary'}
+          aria-label={isOpen ? 'Close chat' : 'Open AI chat'}
         >
           {isOpen ? (
             <X className="h-6 w-6" />
@@ -111,7 +111,7 @@ export function NaryChat() {
       {/* Tooltip (desktop only) */}
       {!isOpen && (
         <div className="absolute bottom-full right-0 mb-2 hidden whitespace-nowrap rounded-lg bg-navy px-3 py-2 font-sans text-[13px] text-white lg:block">
-          Ask Nary
+          Ask AI
           <div className="absolute right-5 top-full border-4 border-transparent border-t-navy" />
         </div>
       )}
@@ -134,7 +134,7 @@ export function NaryChat() {
                 <Sparkles className="h-5 w-5 fill-navy text-navy" />
               </div>
               <div>
-                <p className="font-sans text-[15px] font-bold text-navy">Nary</p>
+                <p className="font-sans text-[15px] font-bold text-navy">RAEL AI</p>
                 <p className="font-sans text-xs text-navy/70">{"RAEL's AI Assistant"}</p>
               </div>
               <button

@@ -8,6 +8,7 @@ import { Industries } from '@/components/sections/Industries'
 import { WhyRAEL } from '@/components/sections/WhyRAEL'
 import { ValueStrip } from '@/components/sections/ValueStrip'
 import { Process } from '@/components/sections/Process'
+import { BookCall } from '@/components/sections/BookCall'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/layout/Footer'
 import { NaryChat } from '@/components/chatbot/NaryChat'
@@ -24,6 +25,7 @@ export default function Home() {
         <WhyRAEL />
         <ValueStrip />
         <Process />
+        <BookCall />
         <Contact />
       </main>
       <Footer />

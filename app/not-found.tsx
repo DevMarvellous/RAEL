@@ -30,11 +30,11 @@ export default function NotFound() {
           &larr; Back to Home
         </Link>
         <p className="mt-6 font-sans text-sm text-text-white-muted">
-          Or chat Nary if you need help
+          Or chat with our AI if you need help
         </p>
       </motion.div>
 
-      {/* Nary is still visible */}
+      {/* AI chat is still visible */}
       <NaryChat />
     </main>
   )

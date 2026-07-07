@@ -62,66 +62,107 @@ export function Hero() {
       <div className="pointer-events-none absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-gray-white to-transparent" />
 
       {/* Content */}
-      <div className="relative flex min-h-svh flex-col items-center justify-center px-[var(--container-pad-mobile)] py-32 text-center lg:px-[var(--container-pad-desktop)]">
-        {/* Top Label */}
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 0.1 }}
-          className="mb-6 flex items-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-gold"
-        >
-          <span>&#9670;</span> Software Agency &middot; Est. 2026
-        </motion.p>
+      <div className="relative mx-auto grid min-h-svh max-w-[var(--container-max)] grid-cols-1 items-center gap-12 px-[var(--container-pad-mobile)] py-32 lg:grid-cols-2 lg:gap-16 lg:px-[var(--container-pad-desktop)]">
+        {/* Left: Text */}
+        <div className="text-center lg:text-left">
+          {/* Top Label */}
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.1 }}
+            className="mb-6 flex items-center justify-center gap-2 font-mono text-xs uppercase tracking-[0.12em] text-gold lg:justify-start"
+          >
+            <span>&#9670;</span> Real Estate Growth &middot; From Software To Sales
+          </motion.p>
 
-        {/* Headline */}
-        <div className="mb-6 font-serif text-[clamp(40px,8vw,80px)] font-bold leading-[1.05] text-white">
+          {/* Headline */}
+          <div className="mb-6 font-serif text-[clamp(40px,7vw,72px)] font-bold leading-[1.05] text-white">
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.3 }}
+            >
+              Everything Real
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.45 }}
+            >
+              Estate Needs
+            </motion.div>
+            <motion.div
+              initial={{ opacity: 0, y: 40 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease, delay: 0.6 }}
+            >
+              To <span className="font-serif italic text-gold">Grow</span>.
+            </motion.div>
+          </div>
+
+          {/* Subtext */}
+          <motion.p
+            initial={{ opacity: 0, y: 40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 0.8 }}
+            className="mx-auto mb-10 max-w-lg font-sans text-lg font-light leading-relaxed text-text-white-muted lg:mx-0"
+          >
+            Software, marketing, data, and branding — under one roof, built for real estate teams that want to grow online and sell faster.
+          </motion.p>
+
+          {/* CTAs */}
           <motion.div
             initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.3 }}
+            transition={{ duration: 0.8, ease, delay: 1.0 }}
+            className="flex flex-col items-center gap-4 sm:flex-row lg:items-start lg:justify-start justify-center"
           >
-            We Build Software
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.45 }}
-          >
-            Businesses
-          </motion.div>
-          <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease, delay: 0.6 }}
-          >
-            <span className="font-serif italic text-gold">Actually</span> Need.
+            <button
+              onClick={handleScrollToContact}
+              className="rounded-full bg-gold px-6 py-3 font-sans text-base font-bold text-navy transition-all duration-250 hover:-translate-y-0.5 hover:bg-gold-light hover:shadow-[0_0_24px_var(--gold-glow)] active:scale-[0.97] sm:px-8 sm:py-3.5"
+            >
+              <span className="mr-2">&rarr;</span>
+              Get More Leads
+            </button>
+            <button
+              onClick={handleScrollToServices}
+              className="rounded-full border border-white/25 bg-white/5 px-6 py-3 font-sans text-base font-semibold text-white backdrop-blur-sm transition-all duration-250 hover:-translate-y-0.5 hover:bg-white/10 active:scale-[0.97] sm:px-8 sm:py-3.5"
+            >
+              See What We Do
+            </button>
           </motion.div>
         </div>
 
-        {/* Subtext */}
-        <motion.p
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 0.8 }}
-          className="mb-10 max-w-sm font-sans text-lg font-light leading-relaxed text-text-white-muted lg:max-w-lg"
-        >
-          Custom apps, dashboards, and automation systems — designed and built for the businesses that need something better than off-the-shelf.
-        </motion.p>
-
-        {/* CTAs */}
+        {/* Right: Framed Property Image */}
         <motion.div
-          initial={{ opacity: 0, y: 40 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, ease, delay: 1.0 }}
-          className="flex flex-col gap-4 sm:flex-row"
+          initial={{ opacity: 0, y: 40, scale: 0.96 }}
+          animate={{ opacity: 1, y: 0, scale: 1 }}
+          transition={{ duration: 1, ease, delay: 0.5 }}
+          className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
-          <button
-            onClick={handleScrollToServices}
-            className="rounded-full bg-white px-6 py-3 font-sans text-base font-semibold text-royal-blue transition-all duration-250 hover:-translate-y-0.5 hover:shadow-[var(--shadow-hover)] active:scale-[0.97] sm:px-8 sm:py-3.5"
+          <div
+            className="relative overflow-hidden rounded-[24px] border border-gold/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+            style={{ animation: 'float2 9s ease-in-out infinite' }}
           >
-            <span className="mr-2">&rarr;</span>
-            See What We Build
-          </button>
+            <img
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80"
+              alt="Modern luxury real estate property"
+              className="h-[300px] w-full object-cover sm:h-[400px] lg:h-[520px]"
+              loading="eager"
+            />
+            <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-royal-blue/50 via-transparent to-transparent" />
+          </div>
+
+          {/* Floating leads badge */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease, delay: 1.1 }}
+            className="absolute -bottom-5 -left-3 rounded-2xl border border-gold/30 bg-white/95 px-4 py-3 shadow-[0_20px_40px_-12px_rgba(0,0,0,0.4)] backdrop-blur-sm sm:-bottom-6 sm:-left-6 sm:px-6 sm:py-4"
+          >
+            <p className="font-serif text-2xl font-bold text-royal-blue sm:text-3xl">More Leads</p>
+            <p className="font-sans text-xs text-text-mid sm:text-sm">Listings that sell faster</p>
+          </motion.div>
         </motion.div>
 
         {/* Scroll Indicator */}

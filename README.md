@@ -1,21 +1,21 @@
 # RAEL — The Refinery African Entrepreneurship Lab
 
-RAEL is a premium software agency based in Osun, Nigeria. We specialize in building production-grade software that businesses *actually* need — from custom web applications to business intelligence dashboards and automation systems.
+RAEL is a real estate growth agency based in Osun, Nigeria. We help agencies, developers, and property teams grow online and sell faster — combining software, marketing, data, and branding under one roof.
 
 ## 🚀 Services
-- **Website & App Development:** Custom full-stack applications built with Next.js and TypeScript.
-- **Business Intelligence:** Real-time dashboards for data-driven decision making.
-- **Business Automation:** WhatsApp bots and automated workflows.
-- **Management Systems:** Tailored solutions for schools, clinics, and real estate.
+- **Software & Systems:** Listing platforms, property websites, agent CRMs, dashboards, and automation built with Next.js and TypeScript.
+- **Digital Marketing:** Property ad campaigns, social content, and lead-generation funnels.
+- **Data & Insights:** Market, pricing, and portfolio analytics for smarter decisions.
+- **Branding & Identity:** Logos, visual identity, and brand systems for property businesses.
 
 ## 🛠 Tech Stack
 - **Frontend:** Next.js (App Router), React, Tailwind CSS, Framer Motion.
-- **AI Integration:** Google Gemini API (Nary AI Assistant).
+- **AI Integration:** Google Gemini API (RAEL AI Assistant).
 - **Forms & Communication:** EmailJS integration.
 - **Deployment:** Vercel.
 
-## 🤖 Nary AI Assistant
-RAEL features **Nary**, an integrated AI assistant built on Gemini 1.5 Flash. Nary is trained to provide instant information about our services, process, and contact details to potential clients.
+## 🤖 AI Assistant
+RAEL features an integrated AI assistant built on Google Gemini. It provides instant information about our services, process, and contact details to potential clients.
 
 ## 📦 Getting Started
 
@@ -38,6 +38,7 @@ RAEL features **Nary**, an integrated AI assistant built on Gemini 1.5 Flash. Na
    ```env
    NEXT_PUBLIC_EMAILJS_SERVICE_ID=your_service_id
    NEXT_PUBLIC_EMAILJS_TEMPLATE_ID=your_template_id
+   NEXT_PUBLIC_EMAILJS_AUTOREPLY_TEMPLATE_ID=your_autoreply_template_id
    NEXT_PUBLIC_EMAILJS_PUBLIC_KEY=your_public_key
    NEXT_PUBLIC_GEMINI_API_KEY=your_gemini_api_key
    ```

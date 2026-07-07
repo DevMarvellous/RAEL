@@ -7,27 +7,27 @@ import { SectionHeader } from '@/components/ui/SectionHeader'
 const steps = [
   {
     number: '01',
-    title: 'Discovery',
-    duration: '1–2 weeks',
-    description: 'We map your business, constraints, and the real problem before writing a single line of code.',
+    title: 'Free consultation call',
+    duration: '~20 minutes',
+    description: 'We get on a call, look at your current setup, and pinpoint where you\'re losing leads. You leave with a clear plan — whether or not you hire us.',
   },
   {
     number: '02',
-    title: 'Design',
-    duration: '1–2 weeks',
-    description: 'We design everything — screens, flows, and experience — and you approve before we build.',
+    title: 'Written scope & fixed quote',
+    duration: '1–3 days',
+    description: 'You get everything in writing: exactly what we\'ll build, the timeline, and one fixed price. You approve it before we touch anything.',
   },
   {
     number: '03',
-    title: 'Build',
-    duration: '4–10 weeks',
-    description: 'We build in 2-week sprints. You see progress every two weeks. No black-box delivery.',
+    title: 'We build — you see it weekly',
+    duration: '1–4 weeks',
+    description: 'You get a working preview link and a short update every week. No black box — you watch it take shape and give feedback as we go.',
   },
   {
     number: '04',
-    title: 'Launch & Support',
+    title: 'Launch + 30 days free support',
     duration: 'ongoing',
-    description: "We deploy, train your team, and support you after go-live. We don't disappear.",
+    description: 'We go live, train your team, and fix anything free for 30 days. After that, we\'re on WhatsApp whenever you need us next.',
   },
 ]
 
@@ -59,7 +59,7 @@ export function Process() {
           <SectionHeader
             number="04"
             label="Process"
-            headline={<>From idea to<br />live product.</>}
+            headline={<>From strategy to<br />steady leads.</>}
             subtext="We keep it simple, transparent, and fast."
           />
         </motion.div>
@@ -82,7 +82,7 @@ export function Process() {
                 >
                   {/* Number circle */}
                   <div className="absolute left-0 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md">
-                    <span className="font-mono text-lg font-bold text-gold">{step.number}</span>
+                    <span className="font-mono text-lg font-bold text-gold-strong">{step.number}</span>
                   </div>
 
                   <div>
@@ -129,7 +129,7 @@ export function Process() {
                   className="relative"
                 >
                   <div className="mb-6 flex h-10 w-10 items-center justify-center rounded-full bg-white shadow-md">
-                    <span className="font-mono text-lg font-bold text-gold">{step.number}</span>
+                    <span className="font-mono text-lg font-bold text-gold-strong">{step.number}</span>
                   </div>
 
                   <h3 className="mb-2 font-sans text-xl font-bold text-text-dark">{step.title}</h3>

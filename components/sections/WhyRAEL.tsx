@@ -8,20 +8,20 @@ import { Shield, Infinity, MapPin } from 'lucide-react'
 const reasons = [
   {
     icon: Shield,
-    title: 'Full Ownership. No Handoff.',
-    description: 'One team handles design, development, and deployment. You deal with one team — from day one to go-live. No confusion. No middlemen.',
+    title: 'A fixed price, in writing, before we start.',
+    description: 'After your free call you get a written scope and a fixed quote. No hourly surprises, no "that\'ll cost extra" halfway through. The number we agree on is the number you pay.',
     animateFrom: { x: -60, opacity: 0 },
   },
   {
     icon: Infinity,
-    title: 'Built to Last, Not Just to Launch.',
-    description: "We don't disappear after go-live. We support, iterate, and grow the product with you over time.",
+    title: 'One person you can always reach.',
+    description: 'You get a direct line to the person running your project — WhatsApp, not a ticket queue. Ask for an update any day and you get a straight answer, not a status page.',
     animateFrom: { y: 60, opacity: 0 },
   },
   {
     icon: MapPin,
-    title: 'Built for Your Market.',
-    description: 'We build for local payment rails, real network conditions, and the users your business actually serves. No square pegs. No round holes.',
+    title: '30 days of free support after launch.',
+    description: 'For a full month after go-live, any bug or fix is on us — no invoice. We built for how property actually moves here: WhatsApp leads, local payments, and buyers who browse on their phones.',
     animateFrom: { x: 60, opacity: 0 },
   },
 ]
@@ -43,7 +43,7 @@ export function WhyRAEL() {
           <SectionHeader
             number="03"
             label="Why Us"
-            headline={<>Why businesses<br />choose RAEL.</>}
+            headline={<>Why real estate<br />chooses RAEL.</>}
           />
         </motion.div>
 

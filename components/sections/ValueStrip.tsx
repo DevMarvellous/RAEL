@@ -4,10 +4,10 @@ import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
 
 const values = [
-  'Custom-Built Software',
-  'African Market Expertise',
-  'End-to-End Delivery',
-  'Post-Launch Support',
+  'Real Estate Focused',
+  'Software · Marketing · Data · Brand',
+  'One Growth Partner',
+  'Ongoing Support',
 ]
 
 const ease = [0.16, 1, 0.3, 1]

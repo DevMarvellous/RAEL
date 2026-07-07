@@ -19,6 +19,7 @@
   /* Accent */
   --gold: #D4A017;
   --gold-light: #F0C040;
+  --gold-strong: #A67C00;
   --gold-glow: rgba(212,160,23,0.20);
 
   /* Text */
@@ -124,6 +125,7 @@
   --color-navy-deep: var(--navy-deep);
   --color-gold: var(--gold);
   --color-gold-light: var(--gold-light);
+  --color-gold-strong: var(--gold-strong);
   --color-gray-white: var(--gray-white);
   --color-gray-light: var(--gray-light);
   --color-text-dark: var(--text-dark);

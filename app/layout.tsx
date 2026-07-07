@@ -26,11 +26,11 @@ const spaceMono = Space_Mono({
 
 export const metadata: Metadata = {
   title: 'RAEL — The Refinery African Entrepreneurship Lab',
-  description: 'Custom software solutions for businesses. We build websites, mobile apps, business intelligence dashboards, automation bots, and management systems.',
-  keywords: 'software agency, custom software, web development, mobile app, business intelligence, automation, Nigeria, Africa',
+  description: 'The growth partner for real estate. RAEL builds software, runs digital marketing, delivers data insights, and creates branding for agencies, developers, and property teams.',
+  keywords: 'real estate marketing, real estate software, property websites, listing platform, real estate branding, property data analytics, real estate agency, Nigeria, Africa',
   openGraph: {
     title: 'RAEL — The Refinery African Entrepreneurship Lab',
-    description: 'Custom software for businesses that need something better.',
+    description: 'Software, marketing, data & branding — built for real estate.',
     url: 'https://rael.refinery.sbs',
     siteName: 'RAEL',
     locale: 'en_NG',
@@ -45,7 +45,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'RAEL — The Refinery African Entrepreneurship Lab',
-    description: 'Custom software for businesses that need something better.',
+    description: 'Software, marketing, data & branding — built for real estate.',
     images: ['/og-image.png'],
   },
   icons: {

@@ -115,11 +115,11 @@ export default function PrivacyPage() {
 
             <section className="mb-10">
               <h2 className="mb-4 font-serif text-2xl font-bold text-text-dark">
-                AI Assistant (Nary)
+                AI Assistant
               </h2>
               <p className="font-sans leading-relaxed text-text-mid">
-                Our website includes an AI assistant called Nary, powered by Google Gemini. 
-                Conversations with Nary are not stored permanently and are only used to provide 
+                Our website includes an AI assistant, powered by Google Gemini.
+                Conversations with the AI assistant are not stored permanently and are only used to provide
                 helpful responses during your session.
               </p>
             </section>

@@ -1,46 +1,45 @@
 'use client'
 
-import { useState, useRef, useEffect } from 'react'
-import { motion, useInView, useMotionValue, useSpring, AnimatePresence } from 'framer-motion'
+import { useRef } from 'react'
+import { motion, useInView, useMotionValue, useSpring } from 'framer-motion'
 import { SectionHeader } from '@/components/ui/SectionHeader'
-import { Monitor, BarChart3, Zap, LayoutGrid, Package, Layers } from 'lucide-react'
+import { Monitor, Megaphone, BarChart3, Palette, Zap, Check } from 'lucide-react'
 
 const services = [
   {
     number: '01',
-    title: 'Website & App Development',
-    description: 'Custom web and mobile applications built from scratch for your exact business logic and your users.',
+    title: 'Software & Systems',
+    description: 'A website that shows all your listings, a place to track every lead from first message to sold, and a dashboard you can update yourself — no developer needed each time.',
+    outcome: 'One place to run your whole property business.',
     icon: Monitor,
   },
   {
     number: '02',
-    title: 'Business Intelligence Dashboards',
-    description: 'Real-time analytics dashboards that turn your business data into decisions you can act on immediately.',
-    icon: BarChart3,
-  },
-  {
-    number: '03',
-    title: 'Business Automation Bots',
-    description: 'WhatsApp bots and automated workflows that handle routine tasks so your team focuses on what matters.',
+    title: 'Automation',
+    description: 'A WhatsApp bot that replies to a new lead in seconds — even at 2am — books the viewing, and follows up with anyone who goes quiet, so no lead slips through.',
+    outcome: 'Every lead answered, day or night.',
     icon: Zap,
   },
   {
+    number: '03',
+    title: 'Digital Marketing',
+    description: 'Facebook and Instagram ads aimed at people actually looking to buy or rent near you, plus posts and landing pages built to turn clicks into real enquiries.',
+    outcome: 'More of the right people seeing your listings.',
+    icon: Megaphone,
+  },
+  {
     number: '04',
-    title: 'Management Systems',
-    description: 'School, clinic, property — fully custom management systems built around how you actually run things.',
-    icon: LayoutGrid,
+    title: 'Data & Insights',
+    description: 'Simple reports that show which listings get attention and which are ignored, what similar properties sell for, and how your sales are doing month to month.',
+    outcome: 'Price right and know what is working.',
+    icon: BarChart3,
   },
   {
     number: '05',
-    title: 'Inventory Management Systems',
-    description: 'Track stock, sales, and suppliers across every location in real time. No more guessing.',
-    icon: Package,
-  },
-  {
-    number: '06',
-    title: 'Custom Enterprise Software',
-    description: 'When your business is too unique for off-the-shelf, we build exactly what it needs.',
-    icon: Layers,
+    title: 'Branding & Identity',
+    description: 'A logo, brand colours, and a clean, consistent look across your website, ads, and documents — so buyers take your business seriously from the first glance.',
+    outcome: 'Look trusted before you say a word.',
+    icon: Palette,
   },
 ]
 
@@ -93,30 +92,25 @@ function ServiceCard({ service, index }: { service: typeof services[0]; index: n
         <div className="absolute inset-0 rounded-[var(--radius-card)] border-2 border-transparent bg-gradient-to-r from-gold via-gold to-gold bg-clip-border" style={{ clipPath: 'inset(0 0 0 0 round var(--radius-card))' }} />
       </div>
 
-      <div className="relative z-10">
+      <div className="relative z-10 flex h-full flex-col">
         <Icon className="mb-4 h-10 w-10 stroke-royal-blue stroke-[1.5]" />
-        <p className="mb-2 font-mono text-[11px] text-gold">{service.number}</p>
         <h3 className="mb-3 font-sans text-xl font-bold text-text-dark">{service.title}</h3>
-        <p className="font-sans text-[15px] leading-relaxed text-text-mid">
+        <p className="mb-5 font-sans text-[15px] leading-relaxed text-text-mid">
           {service.description}
         </p>
+        <div className="mt-auto flex items-start gap-2 border-t border-border pt-4">
+          <Check className="mt-0.5 h-4 w-4 shrink-0 text-gold-strong" />
+          <p className="font-sans text-[14px] font-semibold text-text-dark">{service.outcome}</p>
         </div>
-        </motion.div>
+      </div>
+      </motion.div>
 
   )
 }
 
 export function Services() {
-  const [showAll, setShowAll] = useState(false)
-  const [isMounted, setIsMounted] = useState(false)
   const sectionRef = useRef<HTMLElement>(null)
   const isInView = useInView(sectionRef, { once: true, amount: 0.15 })
-
-  useEffect(() => {
-    setIsMounted(true)
-  }, [])
-
-  const visibleServices = showAll ? services : services.slice(0, 3)
 
   return (
     <section id="services" ref={sectionRef} className="bg-gray-white py-[var(--section-py-mobile)] lg:py-[var(--section-py-desktop)]">
@@ -129,31 +123,19 @@ export function Services() {
           <SectionHeader
             number="01"
             label="Services"
-            headline={<>We build the tools<br />your business needs.</>}
-            subtext="No generic software. No retrofitted templates."
+            headline={<>Five ways we help<br />real estate grow.</>}
+            subtext="Software, automation, marketing, data, and brand — one team, working together."
           />
         </motion.div>
 
         {/* Service Cards Grid */}
-        <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-          <AnimatePresence mode="popLayout">
-            {visibleServices.map((service, index) => (
-              <ServiceCard key={service.number} service={service} index={index} />
-            ))}
-          </AnimatePresence>
+        <div className="mx-auto grid max-w-4xl gap-6 sm:grid-cols-2 lg:max-w-none lg:grid-cols-6">
+          {services.map((service, index) => (
+            <div key={service.number} className="lg:col-span-2 lg:[&:nth-last-child(-n+2)]:col-span-3">
+              <ServiceCard service={service} index={index} />
+            </div>
+          ))}
         </div>
-
-        {/* Show All Button - Mobile Only */}
-        {isMounted && (
-          <div className="mt-8 text-center lg:hidden">
-            <button
-              onClick={() => setShowAll(!showAll)}
-              className="font-sans text-sm font-semibold text-royal-blue underline underline-offset-4"
-            >
-              {showAll ? 'Show less' : 'Show all services'}
-            </button>
-          </div>
-        )}
       </div>
     </section>
   )

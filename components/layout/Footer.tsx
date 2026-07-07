@@ -3,18 +3,17 @@ import Image from 'next/image'
 import { Linkedin, Instagram, Facebook } from 'lucide-react'
 
 const solutions = [
-  'Website & App Development',
-  'Business Intelligence',
-  'Automation Bots',
-  'Management Systems',
-  'Inventory Systems',
-  'Custom Software',
+  'Software & Systems',
+  'Automation',
+  'Digital Marketing',
+  'Data & Insights',
+  'Branding & Identity',
 ]
 
 const companyLinks = [
   { label: 'Home', href: '#home' },
   { label: 'Services', href: '#services' },
-  { label: 'Industries', href: '#industries' },
+  { label: 'Clients', href: '#industries' },
   { label: 'Process', href: '#process' },
   { label: 'Contact', href: '#contact' },
   { label: 'Privacy Policy', href: '/privacy' },

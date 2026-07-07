@@ -7,22 +7,19 @@ import { sendContactForm, type ContactFormData } from '@/lib/emailjs'
 import { Check, Loader2, MessageCircle, Phone, Mail } from 'lucide-react'
 
 const industries = [
-  'Healthcare',
-  'Education',
-  'SME / Retail',
-  'Technology',
-  'Real Estate',
-  'Agriculture',
-  'NGO / Impact',
-  'Other',
+  'Agency / Brokerage',
+  'Property Developer',
+  'Realtor / Agent',
+  'Property Manager',
+  'Investor / Landlord',
+  'PropTech / Other',
 ]
 
 const services = [
-  'Website or Mobile App',
-  'Business Intelligence Dashboard',
-  'Automation Bot',
-  'Management System',
-  'Inventory System',
+  'Software & Systems',
+  'Digital Marketing',
+  'Data & Insights',
+  'Branding & Identity',
   "Not sure yet — let's talk",
 ]
 
@@ -244,7 +241,7 @@ export function Contact() {
                             onChange={handleChange}
                             className="w-full appearance-none rounded-xl border-[1.5px] border-border bg-gray-white px-4 py-3.5 font-sans text-[15px] text-text-dark transition-all focus:border-royal-blue focus:bg-white focus:outline-none focus:ring-[3px] focus:ring-royal-blue/10"
                           >
-                            <option value="" disabled>Industry *</option>
+                            <option value="" disabled>You are a... *</option>
                             {industries.map(ind => (
                               <option key={ind} value={ind}>{ind}</option>
                             ))}
