@@ -13,7 +13,6 @@ import { BookCall } from '@/components/sections/BookCall'
 import { Contact } from '@/components/sections/Contact'
 import { Footer } from '@/components/layout/Footer'
 import { NaryChat } from '@/components/chatbot/NaryChat'
-import { WhatsAppButton } from '@/components/WhatsAppButton'
 
 export default function Home() {
   // When arriving via /#section (e.g. from another page), scroll there once mounted.

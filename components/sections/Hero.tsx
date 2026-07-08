@@ -40,14 +40,14 @@ export function Hero() {
             }}
           />
           <div
-            className="pointer-events-none absolute -bottom-[80px] -left-[60px] h-[350px] w-[350px] rounded-full opacity-60"
+            className="pointer-events-none absolute -bottom-[80px] -left-[60px] hidden h-[350px] w-[350px] rounded-full opacity-60 sm:block"
             style={{
               background: 'radial-gradient(circle, rgba(212,160,23,0.08) 0%, transparent 70%)',
               animation: 'float2 15s ease-in-out infinite',
             }}
           />
           <div
-            className="pointer-events-none absolute right-[15%] top-[40%] h-[200px] w-[200px] rounded-full opacity-60"
+            className="pointer-events-none absolute right-[15%] top-[40%] hidden h-[200px] w-[200px] rounded-full opacity-60 sm:block"
             style={{
               background: 'radial-gradient(circle, rgba(255,255,255,0.04) 0%, transparent 70%)',
               animation: 'float3 10s ease-in-out infinite',
@@ -142,8 +142,7 @@ export function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
           <div
-            className="relative h-[300px] overflow-hidden rounded-[24px] border border-gold/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:h-[400px] lg:h-[520px]"
-            style={{ animation: 'float2 9s ease-in-out infinite' }}
+            className="relative h-[300px] overflow-hidden rounded-[24px] border border-gold/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:h-[400px] lg:h-[520px] lg:[animation:float2_9s_ease-in-out_infinite]"
           >
             <Image
               src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=75"
