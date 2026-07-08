@@ -21,7 +21,7 @@ export function PageLoader({ children }: PageLoaderProps) {
       localStorage.setItem('rael-visited', 'true')
       const timer = setTimeout(() => {
         setIsLoading(false)
-      }, 1200)
+      }, 600)
       return () => clearTimeout(timer)
     }
   }, [])
@@ -47,11 +47,11 @@ export function PageLoader({ children }: PageLoaderProps) {
               className="flex items-center gap-4 font-serif text-5xl font-black tracking-tight text-white md:text-7xl"
             >
               <Image
-                src="/brand-logo.svg"
-                alt="RAEL Symbol"
+                src="/brand-mark.svg"
+                alt="RAEL"
                 width={80}
                 height={80}
-                className="h-16 w-16 brightness-0 invert md:h-20 md:w-20"
+                className="h-16 w-16 md:h-20 md:w-20"
               />
               RAEL
             </motion.div>

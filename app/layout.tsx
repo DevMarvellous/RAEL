@@ -6,7 +6,7 @@ const playfairDisplay = Playfair_Display({
   subsets: ['latin'],
   variable: '--font-playfair',
   display: 'swap',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['700', '900'],
   style: ['normal', 'italic'],
 })
 
@@ -49,8 +49,8 @@ export const metadata: Metadata = {
     images: ['/og-image.png'],
   },
   icons: {
-    icon: '/brand-logo.svg',
-    apple: '/brand-logo.svg',
+    icon: '/brand-mark.svg',
+    apple: '/brand-mark.svg',
   },
   metadataBase: new URL('https://rael.refinery.sbs'),
 }

@@ -45,11 +45,11 @@ export function Footer() {
           <div className="lg:col-span-1">
             <Link href="/" className="mb-6 flex items-center gap-2 transition-opacity hover:opacity-80">
               <Image
-                src="/brand-logo.svg"
-                alt="RAEL Symbol"
+                src="/brand-mark.svg"
+                alt="RAEL"
                 width={32}
                 height={32}
-                className="h-8 w-8 brightness-0 invert"
+                className="h-8 w-8"
               />
               <span className="font-serif text-2xl font-black tracking-tight text-white">
                 RAEL

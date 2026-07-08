@@ -115,13 +115,11 @@ export function Navbar() {
           {/* Logo */}
           <Link href="/" className="relative z-10 flex items-center gap-2">
             <Image
-              src="/brand-logo.svg"
-              alt="RAEL Symbol"
+              src="/brand-mark.svg"
+              alt="RAEL"
               width={40}
               height={40}
-              className={`h-8 w-8 transition-all duration-300 lg:h-9 lg:w-9 ${
-                isScrolled ? '' : 'brightness-0 invert'
-              }`}
+              className="h-8 w-8 transition-all duration-300 lg:h-9 lg:w-9"
               priority
             />
             <span className={`font-serif text-2xl font-black tracking-tight transition-colors duration-300 lg:text-3xl ${

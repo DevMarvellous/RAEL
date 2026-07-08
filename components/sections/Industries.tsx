@@ -2,6 +2,7 @@
 
 import { useRef } from 'react'
 import { motion, useInView } from 'framer-motion'
+import Image from 'next/image'
 import { SectionHeader } from '@/components/ui/SectionHeader'
 import { Building2, HardHat, UserRound, KeyRound, TrendingUp, Boxes } from 'lucide-react'
 
@@ -41,13 +42,15 @@ export function Industries() {
           initial={{ opacity: 0, y: 40 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.9, ease, delay: 0.15 }}
-          className="relative mb-10 overflow-hidden rounded-[20px] border border-border shadow-[var(--shadow-card)]"
+          className="relative mb-10 h-[220px] overflow-hidden rounded-[20px] border border-border shadow-[var(--shadow-card)] lg:h-[300px]"
         >
-          <img
-            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1600&q=80"
+          <Image
+            src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?auto=format&fit=crop&w=1200&q=70"
             alt="Premium real estate property exterior"
-            className="h-[220px] w-full object-cover lg:h-[300px]"
+            fill
             loading="lazy"
+            sizes="(max-width: 1280px) 100vw, 1200px"
+            className="object-cover"
           />
           <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-royal-blue/70 via-royal-blue/20 to-transparent" />
           <div className="absolute inset-0 flex items-center p-8 lg:p-12">

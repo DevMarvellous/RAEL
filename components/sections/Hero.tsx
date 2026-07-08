@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from 'react'
 import { motion } from 'framer-motion'
+import Image from 'next/image'
 import { ChevronDown } from 'lucide-react'
 
 const ease = [0.16, 1, 0.3, 1]
@@ -141,14 +142,16 @@ export function Hero() {
           className="relative mx-auto w-full max-w-md lg:max-w-none"
         >
           <div
-            className="relative overflow-hidden rounded-[24px] border border-gold/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)]"
+            className="relative h-[300px] overflow-hidden rounded-[24px] border border-gold/40 shadow-[0_30px_80px_-20px_rgba(0,0,0,0.6)] sm:h-[400px] lg:h-[520px]"
             style={{ animation: 'float2 9s ease-in-out infinite' }}
           >
-            <img
-              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=900&q=80"
+            <Image
+              src="https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?auto=format&fit=crop&w=800&q=75"
               alt="Modern luxury real estate property"
-              className="h-[300px] w-full object-cover sm:h-[400px] lg:h-[520px]"
-              loading="eager"
+              fill
+              priority
+              sizes="(max-width: 1024px) 90vw, 45vw"
+              className="object-cover"
             />
             <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-royal-blue/50 via-transparent to-transparent" />
           </div>
