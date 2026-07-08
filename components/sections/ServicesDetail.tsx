@@ -144,11 +144,12 @@ export function ServicesDetail() {
             Our Services
           </p>
           <h1 className="mb-5 font-serif text-[clamp(34px,6vw,60px)] font-bold leading-[1.05] text-text-dark">
-            Five ways we help real estate grow.
+            Everything we do to help real estate grow.
           </h1>
           <p className="font-sans text-lg leading-relaxed text-text-mid">
             Software, automation, marketing, data, and branding — handled by one team that
-            works together. Here is exactly what each one means and how it helps you sell faster.
+            works together. They overlap and support each other, and here is exactly what each
+            one means and how it helps you sell faster.
           </p>
         </div>
 

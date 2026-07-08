@@ -16,27 +16,10 @@ export function NaryChat() {
   const [input, setInput] = useState('')
   const [isLoading, setIsLoading] = useState(false)
   const [messageCount, setMessageCount] = useState(0)
-  const [hasAutoOpened, setHasAutoOpened] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     setIsMounted(true)
-  }, [])
-
-  // Auto-open on desktop after 10 seconds (only once per session)
-  useEffect(() => {
-    const wasAutoOpened = sessionStorage.getItem('nary-auto-opened')
-    const isMobile = window.innerWidth < 1024
-
-    if (!wasAutoOpened && !isMobile) {
-      const timer = setTimeout(() => {
-        setIsOpen(true)
-        setHasAutoOpened(true)
-        sessionStorage.setItem('nary-auto-opened', 'true')
-      }, 10000)
-
-      return () => clearTimeout(timer)
-    }
   }, [])
 
   // Add opening message when chat opens for first time

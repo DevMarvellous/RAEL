@@ -123,8 +123,8 @@ export function Services() {
           <SectionHeader
             number="01"
             label="Services"
-            headline={<>Five ways we help<br />real estate grow.</>}
-            subtext="Software, automation, marketing, data, and brand — one team, working together."
+            headline={<>Everything we do to<br />help real estate grow.</>}
+            subtext="Software, automation, marketing, data, and brand — all working together, from one team."
           />
         </motion.div>
 
