@@ -1,5 +1,6 @@
 'use client'
 
+import { useEffect } from 'react'
 import { PageLoader } from '@/components/PageLoader'
 import { Navbar } from '@/components/layout/Navbar'
 import { Hero } from '@/components/sections/Hero'
@@ -15,6 +16,20 @@ import { NaryChat } from '@/components/chatbot/NaryChat'
 import { WhatsAppButton } from '@/components/WhatsAppButton'
 
 export default function Home() {
+  // When arriving via /#section (e.g. from another page), scroll there once mounted.
+  useEffect(() => {
+    if (typeof window === 'undefined' || !window.location.hash) return
+    const id = window.location.hash.replace('#', '')
+    const t = setTimeout(() => {
+      const el = document.getElementById(id)
+      if (el) {
+        const offsetPosition = el.getBoundingClientRect().top + window.pageYOffset - 80
+        window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+      }
+    }, 400)
+    return () => clearTimeout(t)
+  }, [])
+
   return (
     <PageLoader>
       <Navbar />

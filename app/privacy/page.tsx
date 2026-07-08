@@ -29,8 +29,8 @@ export default function PrivacyPage() {
                 Who We Are
               </h2>
               <p className="font-sans leading-relaxed text-text-mid">
-                RAEL (The Refinery African Entrepreneurship Lab) is a software agency based in Lagos, Nigeria. 
-                We build custom digital solutions for businesses across Africa and beyond.
+                RAEL (The Refinery African Entrepreneurship Lab) is a real estate growth agency based in Osun, Nigeria.
+                We help property businesses with software, automation, marketing, data, and branding.
               </p>
               <p className="mt-4 font-sans leading-relaxed text-text-mid">
                 <strong className="text-text-dark">Contact:</strong> therefinary.1@gmail.com

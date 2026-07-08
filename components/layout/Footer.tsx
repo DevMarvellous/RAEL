@@ -11,11 +11,12 @@ const solutions = [
 ]
 
 const companyLinks = [
-  { label: 'Home', href: '#home' },
-  { label: 'Services', href: '#services' },
-  { label: 'Clients', href: '#industries' },
-  { label: 'Process', href: '#process' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', href: '/#home' },
+  { label: 'Services', href: '/services' },
+  // Testimonials hidden until real client details are filled in — re-add when ready:
+  // { label: 'Testimonials', href: '/testimonials' },
+  { label: 'Process', href: '/#process' },
+  { label: 'Contact', href: '/#contact' },
   { label: 'Privacy Policy', href: '/privacy' },
 ]
 

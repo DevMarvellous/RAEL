@@ -4,22 +4,27 @@ import { useState, useEffect } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import Link from 'next/link'
 import Image from 'next/image'
+import { usePathname, useRouter } from 'next/navigation'
 import { Menu, X } from 'lucide-react'
 
+// type 'anchor' = a section on the homepage (smooth-scroll, or route home then scroll).
+// type 'route'  = a standalone page (normal navigation).
 const navLinks = [
-  { href: '#home', label: 'Home' },
-  { href: '#services', label: 'Services' },
-  { href: '#industries', label: 'Clients' },
-  { href: '#about', label: 'About' },
-  { href: '#process', label: 'Process' },
-  { href: '#book', label: 'Book a Call' },
-  { href: '#contact', label: 'Contact' },
+  { href: '#home', label: 'Home', type: 'anchor' as const },
+  { href: '/services', label: 'Services', type: 'route' as const },
+  // Testimonials page exists at /testimonials but is hidden from nav until real
+  // client details are filled in. Re-add when ready:
+  // { href: '/testimonials', label: 'Testimonials', type: 'route' as const },
+  { href: '#contact', label: 'Contact', type: 'anchor' as const },
 ]
 
 export function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false)
   const [isDrawerOpen, setIsDrawerOpen] = useState(false)
   const [activeSection, setActiveSection] = useState('home')
+  const pathname = usePathname()
+  const router = useRouter()
+  const isHome = pathname === '/'
 
   useEffect(() => {
     const handleScroll = () => {
@@ -27,8 +32,10 @@ export function Navbar() {
     }
 
     const handleSectionObserver = () => {
-      const sections = navLinks.map(link => link.href.replace('#', ''))
-      
+      const sections = navLinks
+        .filter(link => link.type === 'anchor')
+        .map(link => link.href.replace('#', ''))
+
       const observer = new IntersectionObserver(
         (entries) => {
           entries.forEach((entry) => {
@@ -69,19 +76,29 @@ export function Navbar() {
     }
   }, [isDrawerOpen])
 
-  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
-    e.preventDefault()
-    setIsDrawerOpen(false)
-    const targetId = href.replace('#', '')
+  const scrollToId = (targetId: string) => {
     const element = document.getElementById(targetId)
     if (element) {
       const offset = 80
       const elementPosition = element.getBoundingClientRect().top
       const offsetPosition = elementPosition + window.pageYOffset - offset
-      window.scrollTo({
-        top: offsetPosition,
-        behavior: 'smooth'
-      })
+      window.scrollTo({ top: offsetPosition, behavior: 'smooth' })
+    }
+  }
+
+  const handleLinkClick = (e: React.MouseEvent<HTMLAnchorElement>, href: string) => {
+    setIsDrawerOpen(false)
+
+    // Page routes: let Next handle navigation normally.
+    if (!href.startsWith('#')) return
+
+    // Anchor links: scroll if on the homepage, otherwise route home then scroll.
+    e.preventDefault()
+    const targetId = href.replace('#', '')
+    if (isHome) {
+      scrollToId(targetId)
+    } else {
+      router.push(`/${href}`) // e.g. "/#process" — homepage handles the scroll on load
     }
   }
 
